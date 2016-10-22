@@ -18,7 +18,7 @@
         android:cropToPadding="false"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp" />
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:text="@string/a_match_has_been_found"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/textView"
         android:textAppearance="@android:style/TextAppearance.Material.Headline" />
 
@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp"
-        android:id="@+id/button3" />
+        android:layout_marginTop="80dp"
+        android:id="@+id/button3"
+        android:onClick="messageYourMatch"/>
 </RelativeLayout>

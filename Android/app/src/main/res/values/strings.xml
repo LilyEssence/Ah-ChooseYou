@@ -3,9 +3,10 @@
     <!-- Actual Strings -->
     <string name="app_name">Ah-Choose You</string>
     <string name="i_sneezed">I sneezed!</string>
-    <string name="login">Login</string>
     <string name="a_match_has_been_found">A match has been found!</string>
     <string name="message_them">Message Them!</string>
     <string name="you_sneezed">You Sneezed!</string>
     <string name="not_yet_implemented">Not yet implemented</string>
+    <string name="log_out">Log Out</string>
+    <string name="user_name">User Name</string>
 </resources>

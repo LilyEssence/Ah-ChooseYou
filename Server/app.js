@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/ah-chooseyou')
+mongoose.connect('mongodb://ahchooseyou1:ahchooseyou1@ds063946.mlab.com:63946/heroku_hk6vv2rf')
     .then(() => console.log('Connection successful'))
     .catch((err) => console.error(err));
 

@@ -22,15 +22,12 @@ import retrofit2.Response;
 
 public class FindMatchActivity extends Activity implements Callback<Sneeze> {
 
-    public
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_match);
 
         Intent intent = getIntent();
-        intent.
         String sneezeId = intent.getStringExtra("sneezeId");
         Log.d("Sneeze Id", sneezeId);
 

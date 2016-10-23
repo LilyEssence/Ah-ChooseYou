@@ -58,7 +58,7 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
             profilepic = (ImageView) findViewById(R.id.imageView2);
 
             Picasso.with(getApplicationContext())
-                    .load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large")
+                    .load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=square&width=600")
                     .into(profilepic);
 
             //profilepic.setImageBitmap(bitmap);

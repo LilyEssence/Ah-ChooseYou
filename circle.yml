@@ -1,2 +1,7 @@
 general:
     build_dir: Android
+
+dependencies:
+    override:
+        - chmod +x gradlew
+        - ./gradlew dependencies

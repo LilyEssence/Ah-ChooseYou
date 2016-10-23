@@ -63,6 +63,8 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
         Call<Sneeze> call = service.createSneeze(mySneeze);
         call.enqueue(this);
 
+
+
         //Get the closest Sneeze to our timestamp
         Call<Sneeze> closestSneezeCall = service.getMatchingSneeze(id, mySneeze.getTimestamp());
         closestSneezeCall.enqueue(this);
@@ -94,6 +96,7 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
     public void logout(View view) {
         LoginManager.getInstance().logOut();
         startActivity(new Intent(this, LoginActivity.class));
+        finish();
 
     }
 

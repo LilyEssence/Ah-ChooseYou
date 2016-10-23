@@ -36,9 +36,7 @@ public class LoginActivity extends Activity {
         if (isLoggedIn()) {
             Toast.makeText(this, "You are logged in", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, WelcomeActivity.class));
-            Button welcomeScreenButton = (Button) findViewById(R.id.button4);
-            welcomeScreenButton.setVisibility(View.VISIBLE);
-
+            finish();
         }
 
 
@@ -69,6 +67,7 @@ public class LoginActivity extends Activity {
 
                 //Go to Main Activity
                 startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                finish();
             }
 
             @Override
@@ -81,6 +80,18 @@ public class LoginActivity extends Activity {
                 Log.v("facebook - onError", exception.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (isLoggedIn()) {
+            Toast.makeText(this, "You are logged in", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, WelcomeActivity.class));
+            finish();
+        }
+
     }
 
     @Override

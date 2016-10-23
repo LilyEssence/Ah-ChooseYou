@@ -1,3 +1,2 @@
-test:
-  override:
-    - ./Android/gradlew build
+general:
+    build_dir: Android

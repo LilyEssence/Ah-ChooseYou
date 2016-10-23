@@ -2,14 +2,13 @@ package com.ahchooseyou.ah_chooseyou;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -18,9 +17,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 
 public class LoginActivity extends Activity {
@@ -37,19 +33,11 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
 
-        //get hash
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.packagename",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
+        if (isLoggedIn()) {
+            Toast.makeText(this, "You are logged in", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, WelcomeActivity.class));
+            Button welcomeScreenButton = (Button) findViewById(R.id.button4);
+            welcomeScreenButton.setVisibility(View.VISIBLE);
 
         }
 
@@ -80,7 +68,7 @@ public class LoginActivity extends Activity {
                 }
 
                 //Go to Main Activity
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
             }
 
             @Override
@@ -103,5 +91,10 @@ public class LoginActivity extends Activity {
         if (callbackManager.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 }

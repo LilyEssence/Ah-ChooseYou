@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
-import java.io.IOException;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -26,7 +24,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public class MainActivity extends Activity implements Callback<Sneeze> {
+public class WelcomeActivity extends Activity implements Callback<Sneeze> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +32,16 @@ public class MainActivity extends Activity implements Callback<Sneeze> {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_welcome);
 
         if (!isLoggedIn()) {
             Toast.makeText(this, "Nobody logged in", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
         } else {
             TextView tv = (TextView) findViewById(R.id.textView2);
+            while(Profile.getCurrentProfile() == null); //spin
             tv.setText(Profile.getCurrentProfile().getName());
         }
-
     }
 
     public void sneeze(View view) {
@@ -88,7 +86,7 @@ public class MainActivity extends Activity implements Callback<Sneeze> {
     }
 
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }

@@ -49,19 +49,10 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
             while(Profile.getCurrentProfile() == null); //spin
             tv.setText(Profile.getCurrentProfile().getName());
 
-
-
-          //  Bitmap bitmap = getFacebookProfilePicture(Profile.getCurrentProfile().getId());
             ImageView profilepic = (ImageView) findViewById(R.id.imageView2);
-
-
-            profilepic = (ImageView) findViewById(R.id.imageView2);
-
             Picasso.with(getApplicationContext())
                     .load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=square&width=600")
                     .into(profilepic);
-
-            //profilepic.setImageBitmap(bitmap);
         }
     }
 

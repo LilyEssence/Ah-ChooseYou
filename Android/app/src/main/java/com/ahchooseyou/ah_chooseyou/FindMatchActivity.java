@@ -16,6 +16,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.Profile;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
@@ -51,11 +52,16 @@ public class FindMatchActivity extends Activity implements Callback<Sneeze> {
                         progressbar.setVisibility(View.INVISIBLE);
                         try {
                             // star
-                            ImageView star = (ImageView) findViewById(R.id.imageView);
-                            star.setVisibility(View.VISIBLE);
                             // star animation
                             String name = response.getJSONObject().getString("name");
-                            tv.setText("A Match has been found: " + name + "!");
+                            tv.setText("A Match has been found: \n" + name + "!");
+
+                            ImageView profilepic = (ImageView) findViewById(R.id.imageView);
+                            profilepic.setVisibility(View.VISIBLE);
+                            Picasso.with(getApplicationContext())
+                                    .load("https://graph.facebook.com/" + sneezeId + "/picture?type=square&width=600")
+                                    .into(profilepic);
+
                         } catch (JSONException e) {
                             // show a x
                             e.printStackTrace();

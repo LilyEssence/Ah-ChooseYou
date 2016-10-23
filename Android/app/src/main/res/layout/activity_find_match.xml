@@ -21,13 +21,14 @@
         android:onClick="messageYourMatch"/>
 
     <TextView
-        android:text="@string/looking_for_a_match"
+        android:text="@string/looking_for_a_match..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <ImageView
         android:src="@drawable/com_facebook_profile_picture_blank_square"

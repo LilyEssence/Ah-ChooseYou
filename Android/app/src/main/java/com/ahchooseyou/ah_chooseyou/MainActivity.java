@@ -32,10 +32,11 @@ public class MainActivity extends Activity {
         if (!isLoggedIn()) {
             Toast.makeText(this, "Nobody logged in", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            TextView tv = (TextView) findViewById(R.id.textView2);
+            tv.setText(Profile.getCurrentProfile().getName());
         }
 
-        TextView tv = (TextView) findViewById(R.id.textView2);
-        tv.setText(Profile.getCurrentProfile().getName());
     }
 
     public void sneeze(View view) {

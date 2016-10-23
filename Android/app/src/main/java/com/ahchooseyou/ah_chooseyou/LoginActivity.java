@@ -14,6 +14,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -24,6 +26,7 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends Activity {
 
     CallbackManager callbackManager;
+    private ProfileTracker mProfileTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,41 +44,47 @@ public class LoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
-                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(loginIntent);
+                //Profile Tracking
+                if(Profile.getCurrentProfile() == null) {
+                    mProfileTracker = new ProfileTracker() {
+                        @Override
+                        protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                            // profile2 is the new profile
+                            Log.v("facebook - profile", profile2.getFirstName());
+                            mProfileTracker.stopTracking();
+                        }
+                    };
+                    // no need to call startTracking() on mProfileTracker
+                    // because it is called by its constructor, internally.
+                }
+                else {
+                    Profile profile = Profile.getCurrentProfile();
+                    Log.v("facebook - profile", profile.getFirstName());
+                }
+
+                //Go to Main Activity
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
 
             @Override
             public void onCancel() {
-                // App code
+                Log.v("facebook - onCancel", "cancelled");
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                Log.v("facebook - onError", exception.getMessage());
             }
         });
-
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.ahchooseyou.ah_chooseyou",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        // if you don't add following block,
+        // your registered `FacebookCallback` won't be called
+        if (callbackManager.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
     }
 }

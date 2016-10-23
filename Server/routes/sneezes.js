@@ -43,18 +43,27 @@ router.delete('/:id', function(req, res, next) {
         res.json(post);
     });
 });
+
 var range = 5*60*1000;
-/* POST /sneezes/match/:id */
-router.post('/match/:timestamp', function(req, res, next) {
+/* POST /sneezes/:id/match/:timestamp */
+router.post('/:id/match/:timestamp', function(req, res, next) {
     var timeToCheck = new Date(req.params.timestamp);
     var start = +timeToCheck + range/2;
     var end = +timeToCheck - range/2;
+    
     Sneeze.find({"timestamp": {'$gte': end, '$lte': start }}, function (err, post) {
         if (err) return next(err);
-        var minDist = post[0] - timeToCheck;
-        var minSneeze = post[0];
-        for(var x = 1; x < post.length; x++) {
-            var diff = post[x] - timeToCheck;
+        
+        var minDist = 5*60*1000;
+        var minSneeze = 0;
+        
+        for(var x = 0; x < post.length; x++) {
+            if(post[x].user_id == req.params.id) {
+                continue;
+            }
+            
+            var diff = post[x].timestamp - timeToCheck;
+            
             if(diff < minDist && -diff < minDist) {
                 minDist = diff;
                 minSneeze = post[x];

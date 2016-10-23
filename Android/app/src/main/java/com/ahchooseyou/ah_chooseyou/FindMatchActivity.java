@@ -2,6 +2,7 @@ package com.ahchooseyou.ah_chooseyou;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,13 +23,15 @@ import retrofit2.Response;
 
 public class FindMatchActivity extends Activity implements Callback<Sneeze> {
 
+    String sneezeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_match);
 
         Intent intent = getIntent();
-        String sneezeId = intent.getStringExtra("sneezeId");
+        sneezeId = intent.getStringExtra("sneezeId");
         Log.d("Sneeze Id", sneezeId);
 
         new GraphRequest(
@@ -52,7 +55,9 @@ public class FindMatchActivity extends Activity implements Callback<Sneeze> {
     }
 
     public void messageYourMatch(View view) {
-        Toast.makeText(this, R.string.not_yet_implemented, Toast.LENGTH_SHORT).show();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                "https://www.facebook.com/app_scoped_user_id/" + sneezeId));
+        startActivity(browserIntent);
     }
 
     @Override

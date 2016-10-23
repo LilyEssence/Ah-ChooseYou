@@ -77,8 +77,8 @@ public class MainActivity extends Activity implements Callback<Sneeze> {
         if (!response.body().user_id.equals(Profile.getCurrentProfile().getId())) {
 
             Intent intent = new Intent(this, FindMatchActivity.class);
-            intent.putExtra("sneezeId", response.body().user_id.toString());
-            startActivity(new Intent(this, FindMatchActivity.class));
+            intent.putExtra("sneezeId", response.body().user_id);
+            startActivity(intent);
         }
     }
 

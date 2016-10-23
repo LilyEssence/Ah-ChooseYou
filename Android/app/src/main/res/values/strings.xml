@@ -9,7 +9,7 @@
     <string name="not_yet_implemented">Not yet implemented</string>
     <string name="log_out">Log Out</string>
     <string name="user_name">User Name</string>
-    <string name="looking_for_a_match">Looking for a match</string>
+    <string name="looking_for_a_match...">Looking for a match...</string>
     <string name="sob">Sob, no matches for you.</string>
     <string name="go_to_welcome_screen">Go to welcome screen</string>
 </resources>

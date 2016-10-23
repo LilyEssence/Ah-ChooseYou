@@ -74,12 +74,10 @@ public class MainActivity extends Activity implements Callback<Sneeze> {
     public void onResponse(Call<Sneeze> call, Response<Sneeze> response) {
         Log.d("Response: ", response.body().toString());
         //Make sure this is the match, not the sneeze we just put in
-        if (response.body().user_id.equals(Profile.getCurrentProfile().getId())) {
-
+        if (!response.body().user_id.equals(Profile.getCurrentProfile().getId())) {
 
             Intent intent = new Intent(this, FindMatchActivity.class);
-            intent.putExtra("sneezeId", response.body().user_id);
-            Toast.makeText(this, response.body().user_id, Toast.LENGTH_SHORT).show();
+            intent.putExtra("sneezeId", response.body().user_id.toString());
             startActivity(new Intent(this, FindMatchActivity.class));
         }
     }

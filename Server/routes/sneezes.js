@@ -65,7 +65,7 @@ router.post('/:id/match/:timestamp', function(req, res, next) {
             var diff = post[x].timestamp - timeToCheck;
             
             if(diff < minDist && -diff < minDist) {
-                minDist = diff;
+                minDist = Math.abs(diff);
                 minSneeze = post[x];
             }
         }

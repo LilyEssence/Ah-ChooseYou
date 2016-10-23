@@ -3,6 +3,7 @@ package com.ahchooseyou.ah_chooseyou;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -35,13 +36,11 @@ public class MainActivity extends Activity {
 
         TextView tv = (TextView) findViewById(R.id.textView2);
         tv.setText(Profile.getCurrentProfile().getName());
-
-
-
     }
 
     public void sneeze(View view) {
         Toast.makeText(this, R.string.you_sneezed, Toast.LENGTH_SHORT).show();
+        //TODO: get your match from backend
         startActivity(new Intent(this, FindMatchActivity.class));
     }
 

@@ -21,7 +21,7 @@
         android:layout_marginTop="100dp" />
 
     <TextView
-        android:text="@string/a_match_has_been_found"
+        android:text="@string/looking_for_a_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"

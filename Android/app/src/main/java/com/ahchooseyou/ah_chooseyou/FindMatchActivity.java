@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +44,20 @@ public class FindMatchActivity extends Activity implements Callback<Sneeze> {
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
                         TextView tv = (TextView) findViewById(R.id.textView);
+                        /**
+                         * hide progresss
+                         */
+                        ProgressBar progressbar = (ProgressBar) findViewById(R.id.progressBar2);
+                        progressbar.setVisibility(View.INVISIBLE);
                         try {
+                            // star
+                            ImageView star = (ImageView) findViewById(R.id.imageView);
+                            star.setVisibility(View.VISIBLE);
+                            // star animation
                             String name = response.getJSONObject().getString("name");
                             tv.setText("A Match has been found: " + name + "!");
                         } catch (JSONException e) {
+                            // show a x
                             e.printStackTrace();
                             tv.setText("Your match is invalid :(");
                         }

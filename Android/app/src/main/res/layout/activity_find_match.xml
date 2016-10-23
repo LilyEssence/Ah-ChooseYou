@@ -10,26 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ahchooseyou.ah_chooseyou.FindMatchActivity">
 
-    <ImageView
-        android:src="@android:drawable/star_big_on"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:cropToPadding="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
-
-    <TextView
-        android:text="@string/looking_for_a_match"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:id="@+id/textView"
-        android:textAppearance="@android:style/TextAppearance.Material.Headline" />
-
     <Button
         android:text="@string/message_them"
         android:layout_width="wrap_content"
@@ -39,4 +19,35 @@
         android:layout_marginTop="80dp"
         android:id="@+id/button3"
         android:onClick="messageYourMatch"/>
+
+    <TextView
+        android:text="@string/looking_for_a_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textAppearance="@android:style/TextAppearance.Material.Headline"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:src="@drawable/com_facebook_profile_picture_blank_square"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:cropToPadding="false"
+        android:layout_marginBottom="19dp"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/progressBar2"
+        android:visibility="visible" />
+
 </RelativeLayout>

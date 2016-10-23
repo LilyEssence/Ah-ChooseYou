@@ -2,9 +2,12 @@ package com.ahchooseyou.ah_chooseyou;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,7 +15,11 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -41,6 +48,20 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
             TextView tv = (TextView) findViewById(R.id.textView2);
             while(Profile.getCurrentProfile() == null); //spin
             tv.setText(Profile.getCurrentProfile().getName());
+
+
+
+          //  Bitmap bitmap = getFacebookProfilePicture(Profile.getCurrentProfile().getId());
+            ImageView profilepic = (ImageView) findViewById(R.id.imageView2);
+
+
+            profilepic = (ImageView) findViewById(R.id.imageView2);
+
+            Picasso.with(getApplicationContext())
+                    .load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large")
+                    .into(profilepic);
+
+            //profilepic.setImageBitmap(bitmap);
         }
     }
 
@@ -109,4 +130,22 @@ public class WelcomeActivity extends Activity implements Callback<Sneeze> {
         @POST("/sneezes/{id}/match/{timestamp}")
         Call<Sneeze> getMatchingSneeze(@Path("id") String id, @Path("timestamp") String timestamp);
     }
+
+    public static Bitmap getFacebookProfilePicture(String userId){
+        URL imageURL = null;
+        try {
+            imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
 }

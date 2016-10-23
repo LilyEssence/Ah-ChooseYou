@@ -23,14 +23,17 @@
         android:layout_alignEnd="@+id/button" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/com_facebook_profile_picture_blank_square"
         android:id="@+id/imageView2"
+        android:adjustViewBounds="true"
         android:layout_marginTop="13dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp" />
 
     <Button
         android:text="@string/i_sneezed"

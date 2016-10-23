@@ -2,6 +2,9 @@ general:
     build_dir: Android
 
 dependencies:
+    pre:
+        - echo y | android update sdk --no-ui --all --filter build-tools-24.0.2
+        - echo y | android update sdk --no-ui --all --filter android-24
     override:
         - chmod +x gradlew
         - ./gradlew dependencies
